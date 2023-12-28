@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using TrelloClone.Services;
 using TrelloClone.ViewModels;
+using System.Linq;
 
 namespace TrelloClone.Controllers
 {
@@ -16,8 +17,16 @@ namespace TrelloClone.Controllers
             _boardService = boardService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string searchString)
         {
+            ViewData["CurrentFilter"] = searchString;
+            ;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var modella = _boardService.ListSearchBoard(searchString);
+                return View(modella);
+            }
             var model = _boardService.ListBoard();
 
             return View(model);
@@ -33,7 +42,7 @@ namespace TrelloClone.Controllers
         public IActionResult Create(NewBoard viewModel)
         {
             _boardService.AddBoard(viewModel);
-            
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -52,6 +61,6 @@ namespace TrelloClone.Controllers
                 return RedirectToAction(nameof(Index));
             }
         }
-  
+
     }
 }

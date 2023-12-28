@@ -29,6 +29,21 @@ namespace TrelloClone.Services
 
             return model;
         }
+        public BoardList ListSearchBoard(string searchString)
+        {
+            var model = new BoardList();
+
+            foreach (var board in _dbContext.Boards.Where(b => b.Title.Contains(searchString)))
+            {
+                model.Boards.Add(new BoardList.Board
+                {
+                    Id = board.Id,
+                    Title = board.Title
+                });
+            }
+
+            return model;
+        }
 
         public BoardView GetBoard(int id)
         {

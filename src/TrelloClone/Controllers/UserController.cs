@@ -88,5 +88,9 @@ namespace TrelloClone.Controllers
             
             return RedirectToAction(nameof(Login));
         }
+
+        public IActionResult profile(){
+            return View("Views/User/Profile.cshtml");
+        }
     }
 }

@@ -3,12 +3,29 @@
     ViewData["Title"] = "Index";
 }
 
+<div class="form-row">
+    <table>
+        <tr>
+            <form method="get" action="/">
+
+                <td style="padding-right:940px">
+                </td>
+                <td>
+                    <input class="form-control" type="text" placeholder="Search for..." name="SearchString"
+                        value="@ViewData["CurrentFilter"]" aria-label="Search" aria-describedby="btnNavbarSearch" />
+                </td>
+                <td>
+                    <input type="submit" value="Search" class="btn btn-primary" />
+                </td>
+            </form>
+        </tr>
+    </table>
+</div>
+
 <div class="container">
     <div class="row">
         <h2>Boards</h2>
-        <a style="background-color:gray" asp-action="Create"
-           asp-controller="Home"
-           class="waves-effect waves-light btn">
+        <a style="background-color:gray" asp-action="Create" asp-controller="Home" class="waves-effect waves-light btn">
             Add New Board
         </a>
 
@@ -28,17 +45,12 @@
                         </div>
 
                         <div class="card-action">
-                            <a asp-action="Index" asp-controller="Board"
-                               asp-route-id="@board.Id"
-                               class="collection-item">View</a>
+                            <a asp-action="Index" asp-controller="Board" asp-route-id="@board.Id"
+                                class="collection-item">View</a>
 
-                            <form asp-action="Delete" asp-controller="Home"
-                                  style="float: right;">
-                                <input type="hidden"
-                                       value="@board.Id"
-                                       name="id" />
-                                <button class="btn-floating btn-small red"
-                                        type="submit">
+                            <form asp-action="Delete" asp-controller="Home" style="float: right;">
+                                <input type="hidden" value="@board.Id" name="id" />
+                                <button class="btn-floating btn-small red" type="submit">
                                     <i class="material-icons">delete</i>
                                 </button>
                             </form>
@@ -49,5 +61,3 @@
         }
     </div>
 </div>
-
-
